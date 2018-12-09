@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+<welcome-file-list>
+	<welcome-file>LoginForm.xhtml</welcome-file>
+</welcome-file-list>
+<context-parm>
+	<param-name>javax.faces.INTERPRET_EMPTY_STING_SUBMITTED_AS_NULL</param-name>
+	<param-value>true</param-value>
+</context-parm>
+<h:head><title>Test Form</title></h:head> 
+<body> 
+<ui:composition template="/layouts/commonLayout.xhtml">
+<ui:include name ="header"></ui:include>
+<ui:define name= "content">
+
+<div align="center"> 
+	<p>Please enter a user name or password that is authorized to access this
+        application. For this application, this means a user that has been
+        created in the <code>file</code> realm and has been assigned to the
+    <em>group</em> of <code>GcuUser</code>.</p>
+    	
+</div>
+<div align="center"> 
+	<form  method="post" action="j_security_check">
+		Username: <h:inputText id="j_username" autocomplete="off" /><br/>
+		Password: <h:inputSecret id="j_password" autocomplete="off" /><br/>
+		<h:commandButton type="submit" value="Submit" />
+	</form>
+	<p><a href="TestResponse.xhtml">Return to Login</a></p>	
+</div>
+
+	First Name: <label><input type = "text" property = "#{user.firstName}"></input></label><h:messages /><br/>
+	Last Name: <label><input type = "text" property = "#{user.lastName}"></input></label><h:messages /><br/>
+	<button value="Submit" property = "#{formController.onSubmit()}">Submit</button> <br/>
+	<button value="Flash" property = "#{formController.onFlash()}">Flash</button>
+	 </ui:define>
+	 <ui:include name ="footer"></ui:include>
+</ui:composition>
+	
+</body> 
+</html>

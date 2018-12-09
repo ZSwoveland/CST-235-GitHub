@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>IndividualAssignment235</display-name>
+  <welcome-file-list>
+    <welcome-file>TestResponse.xhtml</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description>JAX-RS Tools Generated - Do not modify</description>
+    <servlet-name>JAX-RS Servlet</servlet-name>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JAX-RS Servlet</servlet-name>
+    <url-pattern>/jaxrs/*</url-pattern>
+    <url-pattern>Resteasy JAX-RS</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>/faces/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Resteasy Servlet</servlet-name>
+    <url-pattern>/rest/*</url-pattern>
+  </servlet-mapping>
+  <context-param>
+    <param-name>resteasy.scan</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <context-param>
+    <param-name>resteasy.servlet.mapping.prefix</param-name>
+    <param-value>/rest</param-value>
+  </context-param>
+  <listener>
+    <listener-class>
+  		org.jboss.restesay.plugins.server.servlet.ResteasyBootstrap
+  	</listener-class>
+  </listener>
+  <servlet>
+    <servlet-name>Resteast Servlet</servlet-name>
+    <servlet-class>
+  		org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+  	</servlet-class>
+  </servlet>
+  <servlet>
+    <display-name>OrdersSoapService</display-name>
+    <servlet-name>OrdersSoapService</servlet-name>
+    <servlet-class>Business.OrdersSoapService</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrdersSoapService</servlet-name>
+    <url-pattern>/OrdersSoapService</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>Apache-Axis Servlet</display-name>
+    <servlet-name>AxisServlet</servlet-name>
+    <servlet-class>org.apache.axis.transport.http.AxisServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AxisServlet</servlet-name>
+    <url-pattern>/servlet/AxisServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AxisServlet</servlet-name>
+    <url-pattern>*.jws</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AxisServlet</servlet-name>
+    <url-pattern>/services/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>Axis Admin Servlet</display-name>
+    <servlet-name>AdminServlet</servlet-name>
+    <servlet-class>org.apache.axis.transport.http.AdminServlet</servlet-class>
+    <load-on-startup>100</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/servlet/AdminServlet</url-pattern>
+  </servlet-mapping>
+  <!-- Security Configuration --> 
+  <security-constraint>
+        <display-name>GCU Test Application Security Constraints</display-name>
+        <web-resource-collection>
+            <web-resource-name>Protected</web-resource-name>
+    		<description>Protect all pages in Web Root</description>
+            <url-pattern>/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>GcuUser</role-name>
+        </auth-constraint>
+   </security-constraint>
+   <security-constraint>
+  		<web-resource-collection>
+    		<web-resource-name>Public</web-resource-name>
+    		<description>Do not Protect Web Services and JSF Resources</description>
+    		<url-pattern>/rest/*</url-pattern>
+    		<url-pattern>/OrdersSoapService/*</url-pattern>
+   			<url-pattern>/javax.faces.resource/*</url-pattern>
+   		</web-resource-collection>
+	</security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>ApplicationRealm</realm-name>
+        <form-login-config>
+            <form-login-page>/faces/LoginForm.xhtml</form-login-page>
+            <form-error-page>/faces/LoginError.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+   <security-role>
+        <description/>
+        <role-name>GcuUser</role-name>
+   </security-role>
+  
+</web-app>
